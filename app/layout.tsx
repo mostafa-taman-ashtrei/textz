@@ -1,6 +1,7 @@
 import "./globals.css";
 
 import type { Metadata } from "next";
+import NextThemeProvider from "@/providers/NextThemeProvider";
 
 export const metadata: Metadata = {
   title: "TextZ",
@@ -14,7 +15,11 @@ interface props {
 const RootLayout: React.FC<props> = ({ children }) => {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <NextThemeProvider>
+          {children}
+        </NextThemeProvider>
+      </body>
     </html>
   );
 };

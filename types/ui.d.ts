@@ -1,0 +1,1 @@
+export type AuthFormVariantType = "SIGN IN" | "SIGN UP";
