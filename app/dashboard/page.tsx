@@ -1,7 +1,10 @@
+import EmptyBox from "@/components/dashboard/EmptyBox";
 
 const DashboardPage: React.FC = () => {
     return (
-        <div>Dashboard Page</div>
+        <div className="hidden lg:block lg:pl-80 h-full">
+            <EmptyBox />
+        </div>
     );
 };
 

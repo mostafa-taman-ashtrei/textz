@@ -1,7 +1,5 @@
 import DashboardNav from "@/components/navigation/DashboardNav";
 import type { Metadata } from "next";
-import UserList from "./components/UserList";
-import { getUserList } from "@/actions/users";
 
 export const metadata: Metadata = {
     title: "TextZ",
@@ -12,17 +10,15 @@ interface props {
     children: React.ReactNode;
 }
 
-const DashboardLayout: React.FC<props> = async ({ children }) => {
-    const users = await getUserList();
+const ChatLayout: React.FC<props> = ({ children }) => {
 
     return (
         <DashboardNav>
             <div className="h-full">
-                <UserList users={users} />
                 {children}
             </div>
         </DashboardNav>
     );
 };
 
-export default DashboardLayout;
+export default ChatLayout;

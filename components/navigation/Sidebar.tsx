@@ -1,11 +1,9 @@
 "use client";
 
-import { Avatar, AvatarFallback } from "../ui/avatar";
-
-import { AvatarImage } from "@radix-ui/react-avatar";
 import NavItem from "./NavItem";
 import ThemeTogglerButton from "./ThemeTogglerButton";
 import { User } from "@prisma/client";
+import UserAvatar from "../dashboard/UserAvatar";
 import useRoutes from "@/hooks/useRoutes";
 
 interface props {
@@ -14,11 +12,6 @@ interface props {
 
 const Sidebar: React.FC<props> = ({ currentUser }) => {
     const routes = useRoutes();
-
-    const profileImage = {
-        src: currentUser === null || currentUser.image === null ? "images/avatar.png" : currentUser.image,
-        fallback: currentUser === null || currentUser.name === null ? "NU" : currentUser.name.toUpperCase().match(/\b(\w)/g)
-    };
 
     return (
         <div
@@ -59,10 +52,7 @@ const Sidebar: React.FC<props> = ({ currentUser }) => {
                 <ThemeTogglerButton />
 
                 <div className="cursor-pointer hover:opacity-75 transition">
-                    <Avatar>
-                        <AvatarImage src={profileImage.src} />
-                        <AvatarFallback>{profileImage.fallback}</AvatarFallback>
-                    </Avatar>
+                    <UserAvatar user={currentUser} />
                 </div>
             </nav>
         </div>

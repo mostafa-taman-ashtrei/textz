@@ -16,9 +16,9 @@ const useRoutes = () => {
         },
         {
             name: "Chat",
-            href: "/chats",
+            href: "/chat",
             icon: MessageCircle,
-            active: pathname === "/chats"
+            active: pathname === "/chat"
         },
         {
             name: "Logout",

@@ -18,3 +18,20 @@ export const getCurrentUser = async () => {
         return null;
     }
 };
+
+
+export const getUserList = async () => {
+    const session = await getUserSession();
+    if (!session?.user?.email) return null;
+
+    try {
+        const allUsers = await prisma.user.findMany({
+            orderBy: { createdAt: "desc" },
+            where: { NOT: { email: session.user.email } }
+        });
+
+        return allUsers;
+    } catch {
+        return [];
+    }
+};
