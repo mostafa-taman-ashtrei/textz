@@ -4,7 +4,8 @@ import * as z from "zod";
 
 import { AuthFormVariantType, SocialAuthActionType } from "@/types/ui";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { useCallback, useState } from "react";
+import { signIn, useSession, } from "next-auth/react";
+import { useCallback, useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import GoogleIcon from "@/components/general/GoogleIcon";
@@ -12,8 +13,8 @@ import { Input } from "@/components/ui/input";
 import { MoreHorizontal } from "lucide-react";
 import axios from "axios";
 import { generateRandomName } from "@/lib/utils";
-import { signIn, } from "next-auth/react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -31,7 +32,13 @@ const formSchema = z.object({
 
 const AuthForm: React.FC = () => {
     const { toast } = useToast();
+    const session = useSession();
     const [formVariant, setFormVarient] = useState<AuthFormVariantType>("SIGN IN");
+    const router = useRouter();
+
+    useEffect(() => {
+        if (session?.status === "authenticated") router.push("/dashboard");
+    }, [session?.status, router]);
 
 
     const toggleVariant = useCallback(() => {
@@ -63,10 +70,13 @@ const AuthForm: React.FC = () => {
             variant: "destructive"
         });
 
-        if (auth?.ok) toast({
-            title: "Auth Successful",
-            description: `${action} auth successful.`
-        });
+        if (auth?.ok) {
+            router.push("/dashboard");
+            toast({
+                title: "Auth Successful",
+                description: `You will be redirected to your dashboard in a moment.`
+            });
+        }
     };
 
     const handleSubmitForm = async (values: z.infer<typeof formSchema>) => {

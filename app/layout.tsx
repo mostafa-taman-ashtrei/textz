@@ -1,5 +1,6 @@
 import "./globals.css";
 
+import AuthContext from "@/context/AuthContext";
 import type { Metadata } from "next";
 import NextThemeProvider from "@/providers/NextThemeProvider";
 import { Toaster } from "@/components/ui/toaster";
@@ -17,10 +18,12 @@ const RootLayout: React.FC<props> = ({ children }) => {
   return (
     <html lang="en">
       <body>
-        <NextThemeProvider>
-          <Toaster />
-          {children}
-        </NextThemeProvider>
+        <AuthContext>
+          <NextThemeProvider>
+            <Toaster />
+            {children}
+          </NextThemeProvider>
+        </AuthContext>
       </body>
     </html>
   );
