@@ -6,6 +6,7 @@ import useChat from "@/hooks/useChat";
 
 const ChatPage = () => {
     const { isOpen } = useChat();
+
     return (
         <div className={cn(
             "lg:pl-80 h-full lg:block",

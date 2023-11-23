@@ -31,7 +31,7 @@ const UserListItem: React.FC<props> = ({ user }) => {
 
     return (
         <div
-            className="w-full relative flex items-center space-x-3  text-white p-3 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg transition cursor-pointer"
+            className="w-full relative flex items-center space-x-3  p-3 hover:bg-gray-200 dark:hover:bg-gray-900 rounded-lg transition cursor-pointer"
             onClick={handleClick}
         >
             <UserAvatar user={user} />

@@ -23,7 +23,7 @@ const NavItem: React.FC<props> = ({ name, icon: Icon, href, onClick, active, isM
             href={href}
             className={cn(
                 `group flex gap-x-3 text-sm leading-6 font-semibold w-full justify-center p-4 text-gray-500 hover:text-black hover:bg-gray-100`,
-                active && "dark:bg-gray-800  bg-gray-500 text-white",
+                active ? "bg-sky-600 text-white" : "hover:text-black hover:bg-gray-100"
             )}>
             <Icon className="h-6 w-6" />
         </Link>
@@ -34,8 +34,8 @@ const NavItem: React.FC<props> = ({ name, icon: Icon, href, onClick, active, isM
             <Link
                 href={href}
                 className={cn(
-                    `group flex gap-x-3 rounded-xl p-3 text-sm leading-6 font-semibold text-gray-500 hover:text-black hover:bg-gray-100`,
-                    active && "dark:bg-gray-800  bg-gray-500 text-white"
+                    `group flex gap-x-3 rounded-xl p-3 text-sm leading-6 font-semibold text-gray-500`,
+                    active ? "bg-sky-600 text-white" : "hover:text-black hover:bg-gray-100"
                 )}
             >
                 <Icon className="h-6 w-6 shrink-0" aria-hidden="true" />
