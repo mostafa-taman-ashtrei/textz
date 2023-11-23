@@ -81,7 +81,7 @@ const AuthForm: React.FC = () => {
 
     const handleSubmitForm = async (values: z.infer<typeof formSchema>) => {
         try {
-            if (formVariant === "SIGN UP" && values.name === "") {
+            if (formVariant === "SIGN UP") {
                 if (values.name === "") values.name = generateRandomName();
 
                 const response = await axios.post("/api/sign-up", values);
