@@ -2,8 +2,10 @@
 
 import { ArrowLeftCircle, MoreHorizontal } from "lucide-react";
 import { Chat, User } from "@prisma/client";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 import ChatAvatar from "@/components/dashboard/ChatAvatar";
+import ChatSettings from "./ChatSettings";
 import Link from "next/link";
 import UserAvatar from "@/components/dashboard/UserAvatar";
 import useActiveUsers from "@/hooks/useActiveUsers";
@@ -28,9 +30,7 @@ const ChatHeader: React.FC<props> = ({ chat }) => {
     }, [chat, isActive]);
 
     return (
-        <div
-            className=" w-full flex border-b-[1px] sm:px-4 py-3 px-4 lg:px-6 justify-between items-center shadow-sm"
-        >
+        <div className=" w-full flex border-b-[1px] sm:px-4 py-3 px-4 lg:px-6 justify-between items-center shadow-sm">
             <div className="flex gap-3 items-center">
                 <Link
                     href="/chat"
@@ -50,7 +50,15 @@ const ChatHeader: React.FC<props> = ({ chat }) => {
                 </div>
             </div>
 
-            <MoreHorizontal className="text-sky-500 cursor-pointer hover:text-sky-600 transition" />
+            <Sheet>
+                <SheetTrigger>
+                    <MoreHorizontal className="text-sky-500 cursor-pointer hover:text-sky-600 transition" />
+                </SheetTrigger>
+
+                <SheetContent>
+                    <ChatSettings chat={chat} />
+                </SheetContent>
+            </Sheet>
         </div>
     );
 };
