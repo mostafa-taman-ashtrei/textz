@@ -1,5 +1,6 @@
 import "./globals.css";
 
+import ActiveStatus from "@/components/dashboard/ActiveStatus";
 import AuthContext from "@/context/AuthContext";
 import type { Metadata } from "next";
 import NextThemeProvider from "@/providers/NextThemeProvider";
@@ -21,6 +22,7 @@ const RootLayout: React.FC<props> = ({ children }) => {
         <AuthContext>
           <NextThemeProvider>
             <Toaster />
+            <ActiveStatus />
             {children}
           </NextThemeProvider>
         </AuthContext>

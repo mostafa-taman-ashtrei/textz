@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getCurrentUser } from "@/actions/users";
 import prisma from "@/lib/prismaClient";
+import { pusherServer } from "@/lib/pusher";
 
 interface paramsType {
     chatId?: string;
@@ -29,7 +30,7 @@ export const POST = async (req: Request, { params }: { params: paramsType }) => 
         const lastMessage = chat.messages[chat.messages.length - 1];
         if (!lastMessage) return NextResponse.json(chat);
 
-        await prisma.message.update({
+        const updatedMessage = await prisma.message.update({
             where: { id: lastMessage.id },
             include: {
                 sender: true,
@@ -40,8 +41,19 @@ export const POST = async (req: Request, { params }: { params: paramsType }) => 
             }
         });
 
+        await pusherServer.trigger(
+            currentUser.email,
+            "chat:update",
+            {
+                id: chatId,
+                messages: [updatedMessage]
+            }
+        );
+
         // ** If user has already seen the message, no need to go further
         if (lastMessage.seenIds.indexOf(currentUser.id) !== -1) return NextResponse.json(chat);
+
+        await pusherServer.trigger(chatId!, "message:update", updatedMessage);
 
         return new NextResponse("Request Completed Successfully", { status: 200 });
     } catch {

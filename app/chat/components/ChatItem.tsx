@@ -1,5 +1,6 @@
 import { useCallback, useMemo } from "react";
 
+import ChatAvatar from "@/components/dashboard/ChatAvatar";
 import { CheckCheck } from "lucide-react";
 import { PopulatedChatType } from "@/types/messages";
 import UserAvatar from "@/components/dashboard/UserAvatar";
@@ -50,11 +51,11 @@ const ChatItem: React.FC<props> = ({ chat, isSelected }) => {
     <div
       className={cn(
         `w-full relative flex items-center space-x-3 p-3 rounded-xl transition cursor-pointer`,
-        isSelected ? "bg-sky-600 text-white" : "hover:bg-gray-200 dark:hover:bg-gray-800"
+        isSelected ? "bg-sky-600" : "hover:bg-gray-200 dark:hover:bg-gray-800"
       )}
       onClick={handleChatChange}
     >
-      <UserAvatar user={chatPartner} />
+      {chat.isGroup ? <ChatAvatar users={chat.users} /> : <UserAvatar user={chatPartner} />}
 
       <div className="min-w-0 flex-1 ">
         <div className="focus:outline-none">

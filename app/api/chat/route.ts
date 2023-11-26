@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
+import { User } from "@prisma/client";
 import { getCurrentUser } from "@/actions/users";
 import prisma from "@/lib/prismaClient";
+import { pusherServer } from "@/lib/pusher";
 
 export const POST = async (req: Request) => {
     try {
@@ -26,6 +28,12 @@ export const POST = async (req: Request) => {
                     }
                 },
                 include: { users: true }
+            });
+
+            newChat.users.forEach((user: User) => {
+                if (user.email) {
+                    pusherServer.trigger(user.email, "chat:new", newChat);
+                }
             });
 
             return NextResponse.json(newChat, { status: 200 });
@@ -54,6 +62,12 @@ export const POST = async (req: Request) => {
                 }
             },
             include: { users: true }
+        });
+
+        newChat.users.map((user) => {
+            if (user.email) {
+                pusherServer.trigger(user.email, "chat:new", newChat);
+            }
         });
 
         return NextResponse.json(newChat, { status: 200 });

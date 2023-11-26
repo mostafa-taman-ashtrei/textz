@@ -32,10 +32,11 @@ const ChatInput: React.FC = () => {
 
     const handleSubmitForm = async (values: z.infer<typeof formSchema>) => {
         try {
-            form.reset();
             await axios.post("/api/messages", { message: values.messageText, chatId });
+            form.reset();
         } catch {
             throw new Error("Failed to send message");
+        } finally {
         }
     };
 
@@ -72,6 +73,7 @@ const ChatInput: React.FC = () => {
 
                                 <FormControl>
                                     <Input
+                                        disabled={isLoading}
                                         placeholder="Say something to break the ice 🧊"
                                         {...field}
                                     />

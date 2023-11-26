@@ -3,9 +3,12 @@
 import { ArrowLeftCircle, MoreHorizontal } from "lucide-react";
 import { Chat, User } from "@prisma/client";
 
+import ChatAvatar from "@/components/dashboard/ChatAvatar";
 import Link from "next/link";
 import UserAvatar from "@/components/dashboard/UserAvatar";
+import useActiveUsers from "@/hooks/useActiveUsers";
 import useChatPartner from "@/hooks/useChatPartner";
+import { useMemo } from "react";
 
 interface props {
     chat: Chat & {
@@ -15,6 +18,14 @@ interface props {
 
 const ChatHeader: React.FC<props> = ({ chat }) => {
     const chatPartner = useChatPartner(chat);
+    const { members } = useActiveUsers();
+
+    const isActive = members.indexOf(chatPartner?.email!) !== -1;
+
+    const statusText = useMemo(() => {
+        if (chat.isGroup) return `${chat.users.length} members`;
+        return isActive ? "Online" : "Offline";
+    }, [chat, isActive]);
 
     return (
         <div
@@ -28,16 +39,18 @@ const ChatHeader: React.FC<props> = ({ chat }) => {
                     <ArrowLeftCircle />
                 </Link>
 
-                <UserAvatar user={chatPartner} />
+                {chat.isGroup ? <ChatAvatar users={chat.users} /> : <UserAvatar user={chatPartner} />}
 
                 <div className="flex flex-col">
                     <div>{chat.name || chatPartner.name}</div>
+
+                    <div className="text-sm font-light text-neutral-500">
+                        {statusText}
+                    </div>
                 </div>
             </div>
 
-            <MoreHorizontal
-                className="text-sky-500 cursor-pointer hover:text-sky-600 transition"
-            />
+            <MoreHorizontal className="text-sky-500 cursor-pointer hover:text-sky-600 transition" />
         </div>
     );
 };
