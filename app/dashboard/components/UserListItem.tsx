@@ -20,7 +20,7 @@ const UserListItem: React.FC<props> = ({ user }) => {
         setIsLoading(true);
 
         try {
-            const response = await axios.post("/api/chats", { userId: user.id });
+            const response = await axios.post("/api/chat", { userId: user.id });
             if (response.status === 200) router.push(`/chat/${response.data.id}`);
         } catch {
             throw new Error("Failed to  fetch chat");

@@ -2,6 +2,7 @@ import Chats from "./components/Chats";
 import DashboardNav from "@/components/navigation/DashboardNav";
 import type { Metadata } from "next";
 import { getChatList } from "@/actions/chat";
+import { getUserList } from "@/actions/users";
 
 export const metadata: Metadata = {
     title: "TextZ | Chat",
@@ -14,11 +15,15 @@ interface props {
 
 const ChatLayout: React.FC<props> = async ({ children }) => {
     const chatList = await getChatList();
+    const userList = await getUserList();
 
     return (
         <DashboardNav>
             <div className="h-full">
-                <Chats chatList={chatList} />
+                <Chats
+                    chatList={chatList}
+                    userList={userList}
+                />
                 {children}
             </div>
         </DashboardNav>

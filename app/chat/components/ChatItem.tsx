@@ -1,10 +1,12 @@
+import { useCallback, useMemo } from "react";
+
 import { CheckCheck } from "lucide-react";
 import { PopulatedChatType } from "@/types/messages";
 import UserAvatar from "@/components/dashboard/UserAvatar";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import useChatPartner from "@/hooks/useChatPartner";
-import { useMemo } from "react";
+import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 interface props {
@@ -15,6 +17,7 @@ interface props {
 const ChatItem: React.FC<props> = ({ chat, isSelected }) => {
   const chatPartner = useChatPartner(chat);
   const session = useSession();
+  const router = useRouter();
 
   const lastMessage = useMemo(() => {
     const messages = chat.messages || [];
@@ -39,6 +42,9 @@ const ChatItem: React.FC<props> = ({ chat, isSelected }) => {
     return "Chat Started";
   }, [lastMessage]);
 
+  const handleChatChange = useCallback(() => {
+    router.push(`/chat/${chat.id}`);
+  }, [chat, router]);
 
   return (
     <div
@@ -46,6 +52,7 @@ const ChatItem: React.FC<props> = ({ chat, isSelected }) => {
         `w-full relative flex items-center space-x-3 p-3 rounded-xl transition cursor-pointer`,
         isSelected ? "bg-sky-600 text-white" : "hover:bg-gray-200 dark:hover:bg-gray-800"
       )}
+      onClick={handleChatChange}
     >
       <UserAvatar user={chatPartner} />
 
