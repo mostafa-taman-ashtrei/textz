@@ -169,7 +169,7 @@ const AuthForm: React.FC = () => {
                     />
 
                     <Button
-                        className="bg-blue-900 mt-4 justify-center w-full rounded-lg text-white py-2 hover:scale-90"
+                        className="bg-blue-900 mt-4 justify-center w-full rounded-lg text-white py-2 hover:scale-95"
                         type="submit"
                         disabled={isLoading}
                     >
@@ -190,7 +190,7 @@ const AuthForm: React.FC = () => {
             </div>
 
             <Button
-                className="bg-gray-200 dark:bg-white border py-2 w-full rounded-lg mt-5 flex justify-center items-center text-sm hover:scale-90 text-black"
+                className="bg-gray-200 dark:bg-white border py-2 w-full rounded-lg mt-5 flex justify-center items-center text-sm hover:scale-95 text-black"
                 onClick={() => handleSocialAuth("google")}
             >
                 <GoogleIcon />

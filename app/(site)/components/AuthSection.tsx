@@ -10,7 +10,6 @@ const AuthSection: React.FC = () => {
                     <GradientText text="Get Started" />
                 </h2>
 
-
                 <p className="text-xs text-center my-1 text-gray-500">
                     If you are already a member, easily log in if not
                     then you can sign up for a free account.
