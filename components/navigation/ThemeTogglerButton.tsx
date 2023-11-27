@@ -18,7 +18,7 @@ const ThemeTogglerButton: React.FC = () => {
                     <span className="sr-only">Toggle theme</span>
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
+            <DropdownMenuContent align="start">
                 <DropdownMenuItem onClick={() => setTheme("light")} className="flex flex-row gap-1">
                     <Sun />
                     Light
