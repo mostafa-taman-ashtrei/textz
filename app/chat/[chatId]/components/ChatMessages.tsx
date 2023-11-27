@@ -54,6 +54,10 @@ const ChatMessages: React.FC<props> = ({ AllChatMessages }) => {
         };
     }, [chatId]);
 
+    if (messages.length === 0) return <div className="h-screen flex items-center justify-center text-gray-600">
+        There is no messages in this chat ... start chatting now.
+    </div>;
+
 
     return (
         <div className="flex-1 overflow-y-auto">
