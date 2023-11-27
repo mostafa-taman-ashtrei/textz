@@ -1,6 +1,5 @@
-import { Home, LogOut, MessageCircle } from "lucide-react";
+import { Home, MessageCircle } from "lucide-react";
 
-import { signOut } from "next-auth/react";
 import { useMemo } from "react";
 import { usePathname } from "next/navigation";
 
@@ -19,12 +18,6 @@ const useRoutes = () => {
             href: "/chat",
             icon: MessageCircle,
             active: pathname === "/chat"
-        },
-        {
-            name: "Logout",
-            onClick: () => signOut(),
-            href: "#",
-            icon: LogOut,
         }
     ], [pathname]);
 

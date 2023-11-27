@@ -110,6 +110,7 @@ const AuthForm: React.FC = () => {
                 <form
                     className="w-full flex flex-col gap-2"
                     onSubmit={form.handleSubmit(handleSubmitForm)}
+                    id="auth"
                 >
                     {
                         formVariant === "SIGN UP" && <FormField
@@ -168,7 +169,7 @@ const AuthForm: React.FC = () => {
                     />
 
                     <Button
-                        className="bg-blue-900 mt-4 justify-center w-full rounded-lg text-white py-2 hover:rounded-full"
+                        className="bg-blue-900 mt-4 justify-center w-full rounded-lg text-white py-2 hover:scale-90"
                         type="submit"
                         disabled={isLoading}
                     >
@@ -189,7 +190,7 @@ const AuthForm: React.FC = () => {
             </div>
 
             <Button
-                className="bg-gray-200 dark:bg-white border py-2 w-full rounded-lg mt-5 flex justify-center items-center text-sm hover:rounded-full text-black"
+                className="bg-gray-200 dark:bg-white border py-2 w-full rounded-lg mt-5 flex justify-center items-center text-sm hover:scale-90 text-black"
                 onClick={() => handleSocialAuth("google")}
             >
                 <GoogleIcon />
@@ -199,7 +200,7 @@ const AuthForm: React.FC = () => {
 
             <div className="mt-3 text-sm flex justify-between items-center text-gray-500">
                 <p>
-                    {formVariant === "SIGN IN" ? "Don&apos;t" : "Already"}
+                    {formVariant === "SIGN IN" ? "Don't" : "Already"}
                     {" "} have an account? {" "}
                     <span
                         className="hover:underline cursor-pointer font-bold"
