@@ -19,7 +19,6 @@ const MobileNav: React.FC = () => {
                     href={route.href}
                     active={route.active}
                     icon={route.icon}
-                    onClick={route.onClick}
                     name={undefined}
                     isMobile
                 />

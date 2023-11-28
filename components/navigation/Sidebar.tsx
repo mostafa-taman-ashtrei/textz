@@ -20,7 +20,7 @@ const Sidebar: React.FC<props> = ({ currentUser }) => {
     const router = useRouter();
 
     const handleUserMenuclick = (item: "settings" | "logout") => {
-        if (item === "settings") router.push("/dashboard/settings");
+        if (item === "settings") router.push("/settings");
         if (item === "logout") signOut();
     };
 
@@ -53,7 +53,6 @@ const Sidebar: React.FC<props> = ({ currentUser }) => {
                             name={item.name}
                             icon={item.icon}
                             active={item.active}
-                            onClick={item.onClick}
                             isMobile={false}
                         />
                     ))}
